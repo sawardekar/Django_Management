@@ -1,0 +1,47 @@
+{% extends 'hrm/index.html' %}
+{% block content %}
+{% load static %}
+<nav class="" aria-label="breadcrumb">
+  <ol class="breadcrumb breadcrumbs rounded-0 mb-0 py-2">
+	<li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Index</li>
+  </ol>
+</nav>
+
+<div class="container-fluid">
+	<div class="row">
+
+		<section class="m-3 w-100">
+			<h1 class="h3">WelCome</h1>
+		</section>
+
+	</div>
+</div>
+<script type="text/javascript" src="{% static 'js/loader.js' %}"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+	var data = google.visualization.arrayToDataTable([
+	  ['Task', 'Hours per Day'],
+	  ['Task',     200],
+	  ['Shot',      50],
+	  ['Sequence',  5],
+	  ['Project', 1],
+	  ['OS',    7]
+	]);
+
+	var options = {
+	  title: 'Task Activities',
+	  is3D: true,
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+	chart.draw(data, options);
+
+  }
+</script>
+
+<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+{% endblock %}

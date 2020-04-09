@@ -1,0 +1,60 @@
+{% extends 'hrm/index.html' %}
+{% block content %}
+{% load filter %}
+{% load static %}
+<div class="text-left">
+    <a href="{% url 'employee_create'%}" class="btn btn-primary" role="button">ADD</a>
+</div>
+<div class="w-100 pb-0 table_container">
+    <table class="table table-sm table-bordered mt-0" id="emp_table">
+         <thead>
+            {% for tabledetail in tabledetails %}
+
+                    {% if forloop.first %}
+                    <tr>
+                        <th></th>
+                        {% for key, value in tabledetail.items %}
+                                <th>{{key}}</th>
+                        {% endfor %}
+                    </tr>
+                    {% endif %}
+
+            {% endfor %}
+         </thead>
+         <tbody>
+         {% for tabledetail in tabledetails %}
+            <tr>
+                <td><a href="{% url 'employee_modified' tabledetail.id %}">
+                        <i class="fas fa fa-edit" aria-hidden="true"></i>
+                    </a></td>
+                {% for key, val in tabledetail.items %}
+                    {% if val|is_list %}
+                        <td>
+                            {% for v in val %}
+                                {{v}}{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </td>
+                        {% else %}
+
+                            {% if val|image_value %}
+                                <td><img src="{{val}}" class="img_fluid" style="height:50px; width:100px"></td>
+                            {% else %}
+                                <td>{{val}}</td>
+                            {% endif %}
+                        {% endif %}
+                {% endfor %}
+            </tr>
+         {% endfor %}
+         </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready( function () {
+    $('#emp_table').DataTable({
+        scrollX : true
+    });
+
+
+} );
+</script>
+{% endblock %}
