@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.timezone import now
 from django.contrib.postgres.fields import ArrayField, JSONField
+from django.utils.html import mark_safe
 # Create your models here.
 
 GENDER_STATUS = (
@@ -29,6 +30,13 @@ class Employee(models.Model):
     def __str__(self):
         return self.name
 
+    def image_tag(self):
+        if self.photo:
+            return mark_safe('<img src="/media/%s" width="50" height="50" />' % (self.photo))
+        else:
+            return mark_safe('<img src="/media/document/default.jpg" width="50" height="50" />')
+
+    image_tag.short_description = 'Image'
 
 class EmployeeType(models.Model):
     name = models.CharField(max_length=500, blank=True, null=True, unique=True)
