@@ -1,16 +1,46 @@
 import requests
-# from django.http import HttpResponse
+from django.urls import reverse
 from django.shortcuts import render
 from rest_framework import viewsets
 # from django.core import serializers
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, HttpResponse
 from hrm.serializers import EmployeeTypeSerializer, ProductSerializer
 from hrm.models import EmployeeType, Product
 # Create your views here.
 
 
+@login_required
 def index(request):
-    # return HttpResponse("Successfully created Employee app")
     return render(request, 'hrm/home.html')
+    # if request.user.is_authenticated:
+    #     return render(request, 'hrm/home.html')
+    # else:
+    #     return render(request, 'hrm/login.html')
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return render(request, 'hrm/login.html')
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('index'))
+            else:
+                return HttpResponse("Your account was inactive.")
+        else:
+            return HttpResponse("Invalid login details given")
+    else:
+        return render(request, 'hrm/login.html')
 
 
 def employee_table(request):

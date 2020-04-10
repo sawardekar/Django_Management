@@ -31,11 +31,11 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <a id="sidebarCollapse" class="glyphicon glyphicon-align-justify d-block text-right">
-                    ☰
+                <a id="sidebarCollapse" class="text-left">
+                    <i class="fas fa-th-list"></i>
                 </a>
-                <h3>Bootstrap Sidebar</h3>
-                <strong>BS</strong>
+                <h3>Django Management</h3>
+                <strong>DM</strong>
 
             </div>
 
@@ -81,6 +81,12 @@
                     <a href="#">
                         <i class="fas fa-briefcase"></i>
                         About
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
                     </a>
                 </li>
             </ul>

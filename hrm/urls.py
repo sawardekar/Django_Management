@@ -9,6 +9,8 @@ router.register(r'product', views.ProductViewSet, basename="product")
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('login', views.user_login, name='login'),
+    path('logout', views.user_logout, name='logout'),
     path('employee', views.employee_table, name="employee_table"),
     path('employee/', views.employee_form, name="employee_create"),
     path('employee/<int:pk>', views.employee_form, name="employee_modified"),
