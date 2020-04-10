@@ -187,14 +187,14 @@
                 method = 'POST'
             }
             $.ajax({
-                url: urls,
-                type: method,
-                enctype: 'multipart/form-data',
-                data: formData,
+                url : urls,
+                type : method,
+                enctype : 'multipart/form-data',
+                data : formData,
                 headers : {'X-CSRFToken': '{{csrf_token}}'},
-                dataType: 'json',
-                processData: false,
-                contentType: false,
+                dataType : 'json',
+                processData : false,
+                contentType : false,
                 success: function (data) {
                     console.log(data);
                     location.reload();

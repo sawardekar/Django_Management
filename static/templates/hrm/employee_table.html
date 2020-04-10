@@ -16,6 +16,7 @@
                         {% for key, value in tabledetail.items %}
                                 <th>{{key}}</th>
                         {% endfor %}
+                        <th></th>
                     </tr>
                     {% endif %}
 
@@ -43,6 +44,8 @@
                             {% endif %}
                         {% endif %}
                 {% endfor %}
+                <td><input type="button" class="btn btn-danger delete" value="Delete" data-key="{{tabledetail.id}}">
+                </td>
             </tr>
          {% endfor %}
          </tbody>
@@ -50,11 +53,28 @@
 </div>
 <script type="text/javascript">
     $(document).ready( function () {
-    $('#emp_table').DataTable({
-        scrollX : true
+        $('#emp_table').DataTable({
+            scrollX : true
+        });
+        $('.delete').on('click', function(e){
+                e.preventDefault();
+                var pk = $(this).attr("data-key");
+                delete_record(pk);
+        });
+        function delete_record(pk) {
+            $.ajax({
+                url : '/emp/' + pk + '/',
+                type : 'DELETE',
+                headers : {'X-CSRFToken': '{{csrf_token}}'},
+                success : function () {
+                    console.log("Deleted data successfully");
+                    location.reload();
+                },
+                error : function(error){
+                    console.log(error);
+                }
+            });
+        }
     });
-
-
-} );
 </script>
 {% endblock %}
