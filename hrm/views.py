@@ -1,4 +1,4 @@
-import requests
+import requests, json
 from django.urls import reverse
 from django.shortcuts import render
 from rest_framework import viewsets
@@ -6,6 +6,7 @@ from rest_framework import viewsets
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
+from django.db import connection
 from hrm.serializers import EmployeeTypeSerializer, ProductSerializer
 from hrm.models import EmployeeType, Product
 # Create your views here.
@@ -13,7 +14,15 @@ from hrm.models import EmployeeType, Product
 
 @login_required
 def index(request):
-    return render(request, 'hrm/home.html')
+    cursor = connection.cursor()
+    cursor.execute('''
+    select pro.name, emp.type_count from hrm_product as pro,
+    (select count(type_id) as type_count, type_id from hrm_employee group by type_id) as emp
+    where emp.type_id = pro.id 
+    ''')
+    row = cursor.fetchall()
+    data = [['Product', 'Type per Emp']]+[list(i) for i in row]
+    return render(request, 'hrm/home.html', {'data': json.dumps(data)})
     # if request.user.is_authenticated:
     #     return render(request, 'hrm/home.html')
     # else:

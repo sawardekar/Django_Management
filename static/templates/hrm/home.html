@@ -16,23 +16,18 @@
 		</section>
 
 	</div>
+	<div id="row_data" value="{{data}}"></div>
 </div>
 <script type="text/javascript" src="{% static 'js/loader.js' %}"></script>
 <script type="text/javascript">
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
+  var data1 = document.getElementById('row_data').getAttribute('value');
   function drawChart() {
-	var data = google.visualization.arrayToDataTable([
-	  ['Task', 'Hours per Day'],
-	  ['Task',     200],
-	  ['Shot',      50],
-	  ['Sequence',  5],
-	  ['Project', 1],
-	  ['OS',    7]
-	]);
+	var data = google.visualization.arrayToDataTable(JSON.parse(data1));
 
 	var options = {
-	  title: 'Task Activities',
+	  title: 'Product Type Activities',
 	  is3D: true,
 	};
 
