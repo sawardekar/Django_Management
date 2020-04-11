@@ -7,8 +7,8 @@ DATABASE = {
 }
 
 EMAIL_CREDENTIAL = {
-    'USER': 'sawardekarsmita63@gmail.com',
-    'PASSWORD': 'sawardekar63@'
+    'USER': '',
+    'PASSWORD': ''
 }
 SERVER_CREDENTIAL = {
     'IP_ADDRESS': '127.0.0.1',
