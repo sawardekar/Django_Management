@@ -2,6 +2,11 @@ from django.db import models
 from django.utils.timezone import now
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.utils.html import mark_safe
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your models here.
 
 GENDER_STATUS = (
@@ -38,6 +43,7 @@ class Employee(models.Model):
 
     image_tag.short_description = 'Image'
 
+
 class EmployeeType(models.Model):
     name = models.CharField(max_length=500, blank=True, null=True, unique=True)
 
@@ -50,3 +56,22 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@receiver(post_save, sender=User)
+def save_user(sender, instance, **kwargs):
+    if instance.email:
+        if instance.last_login:
+            send_mail('Security Alert', 'Hello Sir,'
+                                        '\n Your personal info has modified.'
+                                        '\n please check it other wise contact to administration , Click on '
+                                        f'{settings.BASE_URL}/admin'
+                                        '\n do not reply',
+                      settings.EMAIL_HOST_USER, [instance.email])
+        else:
+            send_mail('User Creation', 'Hello Sir,'
+                                       '\n Welcome to xyz company.'
+                                       '\n Please login offical portal, Click on '
+                                       f'{settings.BASE_URL}/admin'
+                                       '\n do not reply',
+                      settings.EMAIL_HOST_USER, [instance.email])
