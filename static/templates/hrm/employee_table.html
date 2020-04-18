@@ -38,7 +38,9 @@
                         {% else %}
 
                             {% if val|image_value %}
-                                <td><img src="{{val}}" class="img_fluid" style="height:50px; width:100px"></td>
+                                <td><img src="{{val}}" class="img_fluid" style="height:50px; width:100px" onerror="this.onerror=null;this.src='https://sawardekar-static.s3.amazonaws.com/media/document/default.jpg';"></td>
+                            {% elif key == 'photo' %}
+                                <td><img src="" class="img_fluid" style="height:50px; width:100px" onerror="this.onerror=null;this.src='https://sawardekar-static.s3.amazonaws.com/media/document/default.jpg';"></td>
                             {% else %}
                                 <td>{{val}}</td>
                             {% endif %}

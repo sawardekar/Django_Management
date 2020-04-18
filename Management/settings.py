@@ -27,8 +27,8 @@ SECRET_KEY = 'cqdkhtjdcvpo3z+z^$)tw8090a=*50^v99j&06pvq2w-9twkjc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [SERVER_CREDENTIAL["IP_ADDRESS"]]
-# ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = [SERVER_CREDENTIAL["IP_ADDRESS"]]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -40,14 +40,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'debug_toolbar',
     'rest_framework',
-    'hrm'
+    'hrm',
+    'storages'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -55,6 +58,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+# CORS Config
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = False
 
 ROOT_URLCONF = 'Management.urls'
 
@@ -163,3 +169,19 @@ else:
     EMAIL_HOST_PASSWORD = 'demo123'
 EMAIL_USE_SSL = False
 EMAIL_USE_TLS = True
+
+# AWS Configuration
+AWS_ACCESS_KEY_ID = AMAZON_CREDENTIAL['ACCESS_KEY_ID']
+AWS_SECRET_ACCESS_KEY = AMAZON_CREDENTIAL['SECRET_ACCESS_KEY']
+AWS_STORAGE_BUCKET_NAME = AMAZON_CREDENTIAL['STORAGE_BUCKET_NAME']
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+STATICFILES_LOCATION = 'static'
+MEDIAFILES_LOCATION = 'media'
+# AWS_DEFAULT_ACL = None
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'Management.storage_backends.StaticStorage'
+DEFAULT_FILE_STORAGE = 'Management.storage_backends.MediaStorage'

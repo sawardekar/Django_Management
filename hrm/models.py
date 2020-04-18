@@ -37,9 +37,9 @@ class Employee(models.Model):
 
     def image_tag(self):
         if self.photo:
-            return mark_safe('<img src="/media/%s" width="50" height="50" />' % (self.photo))
+            return mark_safe('<img src="https://%s/media/%s" width="50" height="50" />' % (settings.AWS_S3_CUSTOM_DOMAIN, self.photo))
         else:
-            return mark_safe('<img src="/media/document/default.jpg" width="50" height="50" />')
+            return mark_safe('<img src="https://%s/media/document/default.jpg" width="50" height="50" />' % (settings.AWS_S3_CUSTOM_DOMAIN))
 
     image_tag.short_description = 'Image'
 
