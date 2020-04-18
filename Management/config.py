@@ -1,7 +1,7 @@
 DATABASE = {
-    'NAME': 'management',
-    'USER': 'postgres',
-    'PASSWORD': 'postgres',
+    'NAME': '',
+    'USER': '',
+    'PASSWORD': '',
     'HOST': '127.0.0.1',
     'PORT': '5432'
 }
