@@ -7,8 +7,8 @@ DATABASE = {
 }
 
 EMAIL_CREDENTIAL = {
-    'USER': 'sawardekarsmita63@gmail.com',
-    'PASSWORD': 'sawardekar63@'
+    'USER': '',
+    'PASSWORD': ''
 }
 SERVER_CREDENTIAL = {
     'IP_ADDRESS': '127.0.0.1',
@@ -16,7 +16,7 @@ SERVER_CREDENTIAL = {
 }
 
 AMAZON_CREDENTIAL = {
-    'ACCESS_KEY_ID': 'AKIASYFWVWQ3IJE3OQXT',
-    'SECRET_ACCESS_KEY': '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',
-    'STORAGE_BUCKET_NAME': 'sawardekar-static'
+    'ACCESS_KEY_ID': '',
+    'SECRET_ACCESS_KEY': '',
+    'STORAGE_BUCKET_NAME': ''
 }
