@@ -102,6 +102,6 @@ ENV/
 
 *.idea/
 
-Management\config.py
+*.config.py
 media
 db.sqlite3
