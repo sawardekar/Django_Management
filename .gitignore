@@ -106,3 +106,4 @@ Management/config.py
 media/
 db.sqlite3
 static/
+migrations/
