@@ -103,5 +103,6 @@ ENV/
 *.idea/
 
 *.config.py
-media
+media/
 db.sqlite3
+static/
