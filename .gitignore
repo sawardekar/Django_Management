@@ -102,7 +102,7 @@ ENV/
 
 *.idea/
 
-*.config.py
+.config.py
 *.media/
 db.sqlite3
 *.static/

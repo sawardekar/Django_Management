@@ -1,0 +1,16 @@
+{% extends 'admin/change_list.html' %}
+{% block object-tools %}
+<form id="age-form" method="POST">
+    {% csrf_token %}
+    <input type="number" name="age" placeholder="Enter age" class="vIntegerField" style="width: 100px;">
+    <input type="submit" value="Update Age" class="btn btn-primary"/>
+</form>
+<script>
+    let ageForm = document.querySelector('#age-form');
+    ageForm.querySelector('input[name="age"]').addEventListener('change', function(e){
+        let ageCount = e.target.value;
+        ageForm.action = 'age/' + ageCount + '/'
+    });
+</script>
+{{ block.super }}
+{% endblock object-tools %}

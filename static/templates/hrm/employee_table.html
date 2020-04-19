@@ -1,0 +1,82 @@
+{% extends 'hrm/index.html' %}
+{% block content %}
+{% load filter %}
+{% load static %}
+<div class="text-left">
+    <a href="{% url 'employee_create'%}" class="btn btn-primary" role="button">ADD</a>
+</div>
+<div class="w-100 pb-0 table_container">
+    <table class="table table-sm table-bordered mt-0" id="emp_table">
+         <thead>
+            {% for tabledetail in tabledetails %}
+
+                    {% if forloop.first %}
+                    <tr>
+                        <th></th>
+                        {% for key, value in tabledetail.items %}
+                                <th>{{key}}</th>
+                        {% endfor %}
+                        <th></th>
+                    </tr>
+                    {% endif %}
+
+            {% endfor %}
+         </thead>
+         <tbody>
+         {% for tabledetail in tabledetails %}
+            <tr>
+                <td><a href="{% url 'employee_modified' tabledetail.id %}">
+                        <i class="fas fa fa-edit" aria-hidden="true"></i>
+                    </a></td>
+                {% for key, val in tabledetail.items %}
+                    {% if val|is_list %}
+                        <td>
+                            {% for v in val %}
+                                {{v}}{% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </td>
+                        {% else %}
+
+                            {% if val|image_value %}
+                                <td><img src="{{val}}" class="img_fluid" style="height:50px; width:100px" onerror="this.onerror=null;this.src='https://sawardekar-static.s3.amazonaws.com/media/document/default.jpg';"></td>
+                            {% elif key == 'photo' %}
+                                <td><img src="" class="img_fluid" style="height:50px; width:100px" onerror="this.onerror=null;this.src='https://sawardekar-static.s3.amazonaws.com/media/document/default.jpg';"></td>
+                            {% else %}
+                                <td>{{val}}</td>
+                            {% endif %}
+                        {% endif %}
+                {% endfor %}
+                <td><input type="button" class="btn btn-danger delete" value="Delete" data-key="{{tabledetail.id}}">
+                </td>
+            </tr>
+         {% endfor %}
+         </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#emp_table').DataTable({
+            scrollX : true
+        });
+        $('.delete').on('click', function(e){
+                e.preventDefault();
+                var pk = $(this).attr("data-key");
+                delete_record(pk);
+        });
+        function delete_record(pk) {
+            $.ajax({
+                url : '/emp/' + pk + '/',
+                type : 'DELETE',
+                headers : {'X-CSRFToken': '{{csrf_token}}'},
+                success : function () {
+                    console.log("Deleted data successfully");
+                    location.reload();
+                },
+                error : function(error){
+                    console.log(error);
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
