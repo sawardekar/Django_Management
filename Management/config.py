@@ -1,14 +1,14 @@
 DATABASE = {
-    'NAME': '',
-    'USER': '',
-    'PASSWORD': '',
+    'NAME': 'management',
+    'USER': 'postgres',
+    'PASSWORD': 'postgres',
     'HOST': '127.0.0.1',
     'PORT': '5432'
 }
 
 EMAIL_CREDENTIAL = {
-    'USER': '',
-    'PASSWORD': ''
+    'USER': 'sawardekarsmita63@gmail.com',
+    'PASSWORD': 'sawardekar63@'
 }
 SERVER_CREDENTIAL = {
     'IP_ADDRESS': '127.0.0.1',
@@ -16,7 +16,7 @@ SERVER_CREDENTIAL = {
 }
 
 AMAZON_CREDENTIAL = {
-    'ACCESS_KEY_ID': '',
-    'SECRET_ACCESS_KEY': '',
-    'STORAGE_BUCKET_NAME': ''
+    'ACCESS_KEY_ID': 'AKIASYFWVWQ3IJE3OQXT',
+    'SECRET_ACCESS_KEY': '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',
+    'STORAGE_BUCKET_NAME': 'sawardekar-static'
 }
