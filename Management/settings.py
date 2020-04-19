@@ -181,6 +181,7 @@ AWS_S3_OBJECT_PARAMETERS = {
 STATICFILES_LOCATION = 'static'
 MEDIAFILES_LOCATION = 'media'
 # AWS_DEFAULT_ACL = None
+AWS_S3_FILE_OVERWRITE = False
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'Management.storage_backends.StaticStorage'

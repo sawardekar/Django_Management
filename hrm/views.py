@@ -16,9 +16,9 @@ from hrm.models import EmployeeType, Product
 def index(request):
     cursor = connection.cursor()
     cursor.execute('''
-    select pro.name, emp.type_count from hrm_product as pro,
+    select type.name, emp.type_count from hrm_employeetype as type,
     (select count(type_id) as type_count, type_id from hrm_employee group by type_id) as emp
-    where emp.type_id = pro.id 
+    where emp.type_id = type.id 
     ''')
     row = cursor.fetchall()
     data = [['Product', 'Type per Emp']]+[list(i) for i in row]
