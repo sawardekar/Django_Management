@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.db import connection
+from django.contrib.auth.models import User
 from hrm.serializers import EmployeeTypeSerializer, ProductSerializer
 from hrm.models import EmployeeType, Product
 # Create your views here.
@@ -50,6 +51,35 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'hrm/login.html')
+
+
+def user_register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        try:
+            User.objects.create_user(username=username, email=email, password=password, is_staff=True)
+        except:
+            return HttpResponse("User creation data is wrong.")
+        return HttpResponseRedirect(reverse('login'))
+    else:
+        return render(request, 'hrm/register.html')
+
+
+def user_restpassword(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try:
+            user_obj = User.objects.get(username=username)
+            user_obj.set_password(password)
+            user_obj.save()
+        except:
+            return HttpResponse("User Does Not Exist")
+        return HttpResponseRedirect(reverse('login'))
+    else:
+        return render(request, 'hrm/password.html')
 
 
 def employee_table(request):
