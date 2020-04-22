@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+<html style="height:100%">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Management</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css'%}">
+    <!-- Data tables CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.min.css' %}">
+    <!-- favicon.ico Error handle -->
+<!--    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>-->
+    <link rel="icon" type="image/ico" href="{% static 'images/log.png' %}" />
+    <!-- Font Awesome JS -->
+    <script defer src="{% static 'js/solid.js'%}"></script>
+    <script defer src="{% static 'js/fontawesome.js'%}"></script>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <a id="sidebarCollapse" class="text-left">
+                    <i class="fas fa-th-list"></i>
+                </a>
+                <h3>Django Management</h3>
+                <strong>DM</strong>
+
+            </div>
+
+            <ul class="list-unstyled components">
+
+                <li class="active">
+                    <a href="{% url 'index' %}">
+                        <i class="fas fa-home"></i>
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-copy"></i>
+                        HRM
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="{% url 'employee_table' %}">Employee</a>
+                        </li>
+                        <li>
+                            <a href="#">Employee Type</a>
+                        </li>
+                        <li>
+                            <a href="#">Product</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="fas fa-users"></i>
+                        Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    <i class="fas fa-address-book"></i>
+                        Contact
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-briefcase"></i>
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin">
+                        <i class="fas fa-user-cog"></i>
+                        Admin
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            {% block content %}
+			{% endblock%}
+        </div>
+    </div>
+
+
+    <!-- Popper.JS -->
+    <script src="{% static 'js/popper.min.js'%}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script src="{% static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+             $("#sidebar").mCustomScrollbar({
+                     theme: "minimal"
+                });
+            $('#sidebarCollapse').on('click', function () {
+                 // open or close navbar
+                $('#sidebar').toggleClass('active');
+                // close dropdowns
+                $('.collapse.in').toggleClass('in');
+                // and also adjust aria-expanded attributes we use for the open/closed arrows
+                // in our CSS
+                $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                if($('#sidebar').hasClass('active')){
+                    $('#content').css('margin-left','80px');
+                } else {
+                    $('#content').css('margin-left','250px');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
