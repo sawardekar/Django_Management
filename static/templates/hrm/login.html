@@ -13,9 +13,12 @@
 
 	<!--Custom styles-->
 	<link rel="stylesheet" href="{% static 'css/login.css'%}">
+    <!-- Font Awesome JS -->
+    <script defer src="{% static 'js/solid.js'%}"></script>
+    <script defer src="{% static 'js/fontawesome.js'%}"></script>
 
-    <script src="{% static 'js/bootstrap.min.js'%}"></script>
-    <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+	<script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+	<script src="{% static 'js/bootstrap.min.js'%}"></script>
 </head>
 <body>
 	<div class="container">
@@ -55,10 +58,10 @@
 				</div>
 				<div class="card-footer">
 					<div class="d-flex justify-content-center links">
-						Don't have an account?<a href="{% url 'register' %}">Sign Up</a>
+						Don't have an account?<a href="{% url 'register' %}" target="_blank">Sign Up</a>
 					</div>
 					<div class="d-flex justify-content-center">
-						<a href="{% url 'restpassword' %}">Forgot your password?</a>
+						<a href="{% url 'restpassword' %}" target="_blank">Forgot your password?</a>
 					</div>
 				</div>
 			</div>
