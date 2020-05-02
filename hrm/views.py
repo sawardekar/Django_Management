@@ -83,7 +83,6 @@ def user_restpassword(request):
 
 
 def employee_table(request):
-    from django.urls import reverse
     url_path = request.build_absolute_uri(reverse('emp_record'))
     response = requests.get(url_path, params=request.GET, json={})
     tabledetails = response.json()
