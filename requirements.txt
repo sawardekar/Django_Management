@@ -3,7 +3,7 @@ boto3==1.13.1
 botocore==1.16.1
 certifi==2020.4.5.1
 chardet==3.0.4
-Django==3.0.5
+Django==3.0.14
 django-cors-headers==3.2.1
 django-debug-toolbar==2.2
 django-rest-framework==0.1.0
